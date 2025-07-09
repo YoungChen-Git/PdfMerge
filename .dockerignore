@@ -1,0 +1,38 @@
+# Build artifacts
+**/bin/
+**/obj/
+**/out/
+
+# IDE and editor files
+.vs/
+.vscode/
+*.user
+*.suo
+*.userprefs
+.DS_Store
+
+# Logs
+*.log
+
+# Runtime files
+*.tmp
+*.cache
+
+# Git
+.git/
+.gitignore
+
+# Documentation (will be copied separately if needed)
+*.md
+
+# Test files (if any)
+**/TestResults/
+
+# NuGet packages (will be restored during build)
+packages/
+*.nupkg
+
+# Other
+.env
+.env.*
+node_modules/

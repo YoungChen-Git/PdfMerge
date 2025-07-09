@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  pdf-merge-service:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      # 將本地的 uploads 目錄掛載到容器內，用於存放要合併的 PDF 檔案
+      - ./uploads:/app/uploads
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
