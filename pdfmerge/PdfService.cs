@@ -5,7 +5,7 @@ using System.Security;
 
 namespace PdfMergeApi.Services
 {
-    public class PdfService
+    public class PdfService : IPdfService
     {
         /// <summary>
         /// 在指定目錄及其子目錄中尋找所有 PDF 檔案並將它們合併成一個檔案。

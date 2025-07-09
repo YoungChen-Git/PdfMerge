@@ -8,9 +8,9 @@ namespace PdfMergeApi.Controllers
     [Route("api/[controller]")]
     public class PdfController : ControllerBase
     {
-        private readonly PdfService _pdfService;
+        private readonly IPdfService _pdfService;
 
-        public PdfController(PdfService pdfService)
+        public PdfController(IPdfService pdfService)
         {
             _pdfService = pdfService;
         }

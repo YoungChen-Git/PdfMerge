@@ -7,12 +7,16 @@ WORKDIR /app
 # 複製 solution 檔案和專案檔案
 COPY *.sln .
 COPY pdfmerge/*.csproj ./pdfmerge/
+COPY pdfmerge.Tests/*.csproj ./pdfmerge.Tests/
 
 # 還原 NuGet 套件
 RUN dotnet restore
 
 # 複製所有原始碼
 COPY . .
+
+# 執行測試
+RUN dotnet test --no-restore --verbosity normal
 
 # 建置應用程式
 WORKDIR /app/pdfmerge

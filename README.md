@@ -15,6 +15,61 @@
 - **.NET 9.0**: 使用最新的 .NET 技術
 - **PdfSharp**: 強大的 PDF 處理庫
 - **ASP.NET Core**: 高效能的 Web 框架
+- **xUnit**: 單元測試框架
+- **FluentAssertions**: 流暢的斷言庫
+- **Moq**: 模擬框架
+
+## 測試
+
+本專案包含完整的單元測試和整合測試，確保程式碼品質和可靠性。
+
+### 測試覆蓋範圍
+
+- 🧪 **單元測試**: `PdfService` 和 `PdfController` 的所有主要功能
+- 🔗 **整合測試**: 完整的 API 端點測試
+- 📝 **模型測試**: 資料模型的驗證測試
+
+### 執行測試
+
+**使用腳本 (推薦)**:
+```bash
+# Linux/macOS
+chmod +x run-tests.sh
+./run-tests.sh
+
+# Windows
+run-tests.bat
+```
+
+**手動執行**:
+```bash
+# 執行所有測試
+dotnet test
+
+# 執行測試並生成覆蓋率報告
+dotnet test --collect:"XPlat Code Coverage"
+
+# 只執行單元測試
+dotnet test --filter "FullyQualifiedName!~Integration"
+
+# 只執行整合測試
+dotnet test --filter "FullyQualifiedName~Integration"
+```
+
+### 測試結構
+
+```
+pdfmerge.Tests/
+├── Controllers/
+│   └── PdfControllerTests.cs       # Controller 單元測試
+├── Services/
+│   └── PdfServiceTests.cs          # Service 單元測試
+├── Models/
+│   └── MergeRequestTests.cs        # Model 測試
+├── Integration/
+│   └── PdfControllerIntegrationTests.cs  # 整合測試
+└── GlobalUsings.cs                 # 全域 using 宣告
+```
 
 ## 快速開始
 
@@ -42,7 +97,18 @@
    dotnet run
    ```
 
-3. **瀏覽 API 文件**:
+3. **執行測試**:
+   ```bash
+   # 快速執行所有測試
+   ./run-tests.sh
+   
+   # 或手動執行
+   dotnet test
+   
+   # 期望結果: 30/30 測試通過 ✅
+   ```
+
+4. **瀏覽 API 文件**:
    - 開發模式: `https://localhost:7135/openapi`
 
 ## API 使用方式
@@ -125,6 +191,26 @@ if (response.ok) {
        environment:
          - ASPNETCORE_ENVIRONMENT=Production
    ```
+
+**注意**: Docker 建置過程中會自動執行所有測試，確保部署的程式碼品質。
+
+### 持續整合 (CI/CD)
+
+建議在 CI/CD 管道中包含以下步驟：
+
+```bash
+# 1. 還原依賴項
+dotnet restore
+
+# 2. 建置專案
+dotnet build --no-restore
+
+# 3. 執行測試
+dotnet test --no-build --verbosity normal
+
+# 4. 發布應用程式
+dotnet publish -c Release -o ./publish
+```
 
 ### 雲端部署
 
@@ -215,6 +301,15 @@ docker logs -f pdf-merge-service
 ## 貢獻
 
 歡迎提交 Issue 和 Pull Request！
+
+在提交 PR 之前，請確保：
+- 所有測試通過：`dotnet test`
+- 程式碼遵循現有的風格
+- 新功能包含適當的測試
+
+## 測試報告
+
+詳細的測試覆蓋範圍和測試案例，請參考 [測試報告](TEST_REPORT.md)。
 
 ## 聯絡資訊
 
